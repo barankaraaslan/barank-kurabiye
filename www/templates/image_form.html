@@ -1,0 +1,23 @@
+<p><label for="id_path">Sectigin fotograf:</label><br> <img id="img" height="200"></p>
+
+<input type="file" accept="image/*" required id="id_path"></p>
+<textarea hidden name="data" cols="40" rows="10" id="id_data"></textarea>
+
+<script type="text/javascript">
+function readFile() {
+  
+  if (this.files && this.files[0]) {
+    
+    var FR= new FileReader();
+    
+    FR.addEventListener("load", function(e) {
+      document.getElementById("img").src       = e.target.result;
+      document.getElementById("id_data").innerHTML = e.target.result;
+    }); 
+    
+    FR.readAsDataURL( this.files[0] );
+  }
+  
+}
+document.getElementById("id_path").addEventListener("change", readFile);
+</script>

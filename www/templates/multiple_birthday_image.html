@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+<link href="{% static 'www/dropzone.css' %}" type="text/css" rel="stylesheet" />
+<script src="{% static 'www/dropzone.js' %}"></script>
+
+<script type="text/javascript">
+	Dropzone.options.myAwesomeDropzone = {
+		headers: { "X-CSRFToken": getCookie('csrftoken') },
+		uploadMultiple: true,
+		paralellUploads: 1,
+	};
+	myAwesomeDropzone.on("successmultiple", function(file,response) { 
+	  	save_responses(response); 
+	});
+	myAwesomeDropzone.on("completemultiple", function() {
+	  if (this.getQueuedFiles().length == 0 && 
+	      this.getUploadingFiles().length == 0) {
+	    process_responses(this.getAcceptedFiles());
+	  }
+	});
+</script>
+
+<label>Birden fazla resim secebilirsiniz. Ayni anda 300 tane resimi denedim ve oldu</label>
+<form action="{% url 'multiple_birthday_image' %}" method="POST" class="dropzone" id="myAwesomeDropzone">
+    <div class="fallback">
+        <input name="file" type="file" multiple />
+        <input type="submit" value="Upload" />
+    </div>
+</form>
+
+{% endblock %} 

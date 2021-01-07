@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+
+<link href="{% static 'www/dropzone.css' %}" type="text/css" rel="stylesheet" />
+<script src="{% static 'www/dropzone.js' %}"></script>
+
+<script type="text/javascript">
+	Dropzone.options.profileDropzone = {
+		headers: { "X-CSRFToken": getCookie('csrftoken') },
+		uploadMultiple: false,
+		// paralellUploads: 1,
+	};
+	// profileDropzone.on("successmultiple", function(file,response) { 
+	//   	save_responses(response); 
+	// });
+	// profileDropzone.on("completemultiple", function() {
+	//   if (this.getQueuedFiles().length == 0 && 
+	//       this.getUploadingFiles().length == 0) {
+	//     process_responses(this.getAcceptedFiles());
+	//   }
+	// });
+</script>
+
+<form action="{% url 'profile_image' %}" method="POST" class="dropzone" id="profileDropzone">
+    <div class="fallback">
+        <input name="file" type="file" multiple />
+        <input type="submit" value="Upload" />
+    </div>
+</form>
+
+{% endblock %}

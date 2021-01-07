@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% include 'info.html' %}
+
+Islem yapmadan once giris yapmaniz gerekmektedir. Eger daha once uyelik olusturmadiysaniz yukaridaki 'Signup' butonundan uyelik olusturabilirsiniz
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+    <input type="hidden" name="next" value="{{ next }}">
+</form>
+
+<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<img src="{{ image.data }}">
+<br>
+<a href="{% url 'delete_birthday_image' id=image.id %}">Delete Image</a>
+
+{% endblock %}
